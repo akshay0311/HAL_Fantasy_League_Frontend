@@ -5,7 +5,6 @@ import { red } from "@mui/material/colors";
 
 const useStyles = makeStyles({
   header: {
-    position: "fixed",
     top: "0",
     opacity: "0.7",
     backgroundColor: red[500],

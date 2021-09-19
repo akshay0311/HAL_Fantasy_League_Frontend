@@ -7,6 +7,8 @@ import ExtractInitials from "../utils/ExtractInitials";
 import { CheckCircle } from "@material-ui/icons";
 import { red } from "@mui/material/colors";
 import axios from "axios";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {

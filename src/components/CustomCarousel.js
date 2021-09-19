@@ -2,8 +2,6 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 import { makeStyles } from "@material-ui/core/styles";
 import carouselImage1 from "../images/carousel1.jpg";
-import carouselImage2 from "../images/carousel2.jpg";
-import carouselImage3 from "../images/carousel3.jpg";
 
 import Header from "./Header";
 
@@ -16,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     [theme.breakpoints.down("sm")]: {
       height: "500px",
-      width: "500px",
+      width: "100%",
     },
   },
   text1: {
@@ -56,12 +54,6 @@ function CustomCarousel() {
       image: carouselImage1,
       text1: "WELCOME TO",
       text2 : "HAL FANTASY LEAGUE"
-    },
-    {
-      image: carouselImage2,
-    },
-    {
-        image : carouselImage3
     }
   ];
 

@@ -1,5 +1,4 @@
 import React from "react";
-import Carousel from "react-material-ui-carousel";
 import { makeStyles } from "@material-ui/core/styles";
 import carouselImage1 from "../images/carousel1.jpg";
 
@@ -58,11 +57,9 @@ function CustomCarousel() {
 
   return (
     <div>
-      <Carousel timeout={10} interval={100000} indicators={false}>
         {items.map((item, i) => (
           <Item key={i} item={item} />
         ))}
-      </Carousel>
     </div>
   );
 }

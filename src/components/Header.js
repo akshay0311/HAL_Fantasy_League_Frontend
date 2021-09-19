@@ -8,7 +8,8 @@ const useStyles = makeStyles({
     position: "fixed",
     top: "0",
     opacity: "0.7",
-    backgroundColor: red[500]
+    backgroundColor: red[500],
+    width : "100%"
   },
   logo: {
     fontFamily: "'Bangers', cursive",

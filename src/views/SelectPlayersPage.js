@@ -14,6 +14,7 @@ dotenv.config();
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
     paddingLeft: theme.spacing(4),
+    marginTop: theme.spacing(2),
     fontFamily: "'Open Sans', sans-serif",
     [theme.breakpoints.down("sm")]: {
       marginTop: theme.spacing(2),
@@ -132,7 +133,7 @@ function SelectPlayersPage() {
   return (
     <div>
       <NavigationHeader />
-      <Grid container spacing={6} className={classes.gridContainer}>
+      <Grid container className={classes.gridContainer}>
         {playersInfo.map((player, index) => (
           <>
             <Grid item sm={4} xs={12}>

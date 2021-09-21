@@ -50,7 +50,7 @@ function HomePage() {
       </section>
       <br />
       <section>
-        <Grid container spacing={2} className={classes.gridContainer}>
+        <Grid container className={classes.gridContainer}>
           <Grid item sm={4} xs={12}>
             <Card content={<CardContent />} action={<CardAction />} />
           </Grid>

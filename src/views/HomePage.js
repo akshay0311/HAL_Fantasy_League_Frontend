@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Carousel from "../components/CustomCarousel";
 import Card from "../components/CustomCard";
 import { Grid, Button } from "@material-ui/core";
@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import jerseyImage from "../images/j2.png";
 import CustomTable from "../components/CustomTable";
 import Footer from "../components/Footer";
-import axios from 'axios';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -17,7 +17,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   gridContainer: {
-    padding: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      padding: theme.spacing(2),
+    },
   },
   bet: {
     color: "#AC4542",
@@ -29,18 +31,19 @@ function HomePage() {
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/players/getPlayers")
-    .then(result=> {
-      let all_players = result.data.all_players;
-      let filtered_all_players = [];
+    axios
+      .get("http://localhost:4000/players/getPlayers")
+      .then((result) => {
+        let all_players = result.data.all_players;
+        let filtered_all_players = [];
 
-      all_players.forEach(player => {
-         filtered_all_players.push({"Name": player.name, "Goals": player.goal})
-      }) 
+        all_players.forEach((player) => {
+          filtered_all_players.push({ Name: player.name, Goals: player.goal });
+        });
 
-      setTableData(filtered_all_players);
-    })
-    .catch(err => console.log(err))
+        setTableData(filtered_all_players);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
@@ -50,7 +53,7 @@ function HomePage() {
       </section>
       <br />
       <section>
-        <Grid container className={classes.gridContainer}>
+        <Grid container spacing={2} className={classes.gridContainer}>
           <Grid item sm={4} xs={12}>
             <Card content={<CardContent />} action={<CardAction />} />
           </Grid>
@@ -58,13 +61,13 @@ function HomePage() {
             <Card content={<CardContent1 />} action={<CardAction />} />
           </Grid>
           <Grid item sm={4} xs={12}>
-            <CustomTable tableData={tableData}/>
+            <CustomTable tableData={tableData} />
           </Grid>
         </Grid>
       </section>
-      <br/>
+      <br />
       <section>
-        <Footer/>
+        <Footer />
       </section>
     </div>
   );

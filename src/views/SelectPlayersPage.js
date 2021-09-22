@@ -1,11 +1,11 @@
-import {Grid, Button } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import Avatar from "@mui/material/Avatar";
 import React, { useState, useEffect } from "react";
 import NavigationHeader from "../components/NavigationHeader";
 import CustomDialogBox from "../components/CustomDialogBox";
 import { makeStyles } from "@material-ui/core/styles";
 import ExtractInitials from "../utils/ExtractInitials";
-import { CheckCircle } from "@material-ui/icons";
+import { CheckCircle, CheckCircleOutline } from "@material-ui/icons";
 import { red } from "@mui/material/colors";
 import axios from "axios";
 import dotenv from "dotenv";
@@ -14,7 +14,6 @@ dotenv.config();
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
     paddingLeft: theme.spacing(4),
-    marginTop: theme.spacing(2),
     fontFamily: "'Open Sans', sans-serif",
     [theme.breakpoints.down("sm")]: {
       marginTop: theme.spacing(2),
@@ -52,10 +51,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   submitButton: {
-    marginTop : "20px",
+    marginTop: "20px",
     marginBottom: "20px",
     width: "80%",
-    marginLeft : "10%",
+    marginLeft: "10%",
     marginRight: "10%",
     borderRadius: "10px",
     backgroundColor: red[500],
@@ -70,16 +69,19 @@ function SelectPlayersPage() {
   const [playersChosen, setPlayersChosen] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
-  const [open, setOpen] = React.useState(false);
+  const [openConfirmation, setOpenConfirmation] = React.useState(false);
+  const [openThanks, setOpenThanks] = React.useState(false);
 
+  // Opening the confirmation Dialog Box
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenConfirmation(true);
   };
 
+  // Closing Both Confirmation and Thanks Dialog Box
   const handleClose = () => {
-    setOpen(false);
+    setOpenConfirmation(false);
+    setOpenThanks(false);
   };
-
 
   const selectPlayer = (playerId) => {
     if (playersChosen.length >= 3 && !playersChosen.includes(playerId))
@@ -98,15 +100,19 @@ function SelectPlayersPage() {
   };
 
   const submitSelectedPlayers = () => {
-    axios.post(`http://localhost:4000/players/selectPlayers`,
-    {
-      username: "Akshay Mishra",
-      date: null,
-      players : playersChosen
-    })
-    .then(result => console.log(result))
-    .catch(err => console.log(err))
-  }
+    axios
+      .post(`http://localhost:4000/players/selectPlayers`, {
+        username: "Akshay Mishra",
+        date: null,
+        players: playersChosen,
+      })
+      .then((result) => {
+        console.log(result);
+        setOpenConfirmation(false);
+        setOpenThanks(true)
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     let username = "Akshay Mishra";
@@ -133,7 +139,7 @@ function SelectPlayersPage() {
   return (
     <div>
       <NavigationHeader />
-      <Grid container className={classes.gridContainer}>
+      <Grid container spacing={6} className={classes.gridContainer}>
         {playersInfo.map((player, index) => (
           <>
             <Grid item sm={4} xs={12}>
@@ -178,13 +184,33 @@ function SelectPlayersPage() {
       {playersChosen.length >= 1 && (
         <Grid container>
           <Grid item xs={12}>
-            <Button className={classes.submitButton} variant="contained" onClick={handleClickOpen}>
+            <Button
+              className={classes.submitButton}
+              variant="contained"
+              onClick={handleClickOpen}
+            >
               Submit
             </Button>
           </Grid>
         </Grid>
       )}
-      <CustomDialogBox open={open} handleClose={handleClose} submit={submitSelectedPlayers}/>
+      <CustomDialogBox
+        openConfirmation={openConfirmation}
+        handleClose={handleClose}
+        submit={submitSelectedPlayers}
+        dialogTitle="Are you sure to move ahead?"
+        dialogContent={
+          "You have selected " +
+          playersChosen.length +
+          " players.Are you sure you want to move ahead"
+        }
+      />
+      <CustomDialogBox
+        openThanks = {openThanks}
+        handleClose = {handleClose}
+        dialogTitle = "Thank you so much!!"
+        dialogContent = {<CheckCircleOutline fontSize="large"/>}
+      />
     </div>
   );
 }

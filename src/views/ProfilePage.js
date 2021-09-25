@@ -28,7 +28,7 @@ function ProfilePage() {
     const [tableData, setTableData] = useState([]);
 
     useEffect(()=> {
-        axios.get("http://:4000/scores/getAllScores")
+        axios.get("http://172.105.37.155:4000/scores/getAllScores")
         .then(result => {
             setTableData(result.data.all_scores)
         })

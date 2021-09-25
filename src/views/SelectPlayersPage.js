@@ -8,8 +8,7 @@ import ExtractInitials from "../utils/ExtractInitials";
 import { CheckCircle, CheckCircleOutline } from "@material-ui/icons";
 import { red } from "@mui/material/colors";
 import axios from "axios";
-import dotenv from "dotenv";
-dotenv.config();
+import { useAuth } from "../contexts/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -72,6 +71,8 @@ function SelectPlayersPage() {
   const [openConfirmation, setOpenConfirmation] = React.useState(false);
   const [openThanks, setOpenThanks] = React.useState(false);
 
+  const {currentUser} = useAuth();
+
   // Opening the confirmation Dialog Box
   const handleClickOpen = () => {
     setOpenConfirmation(true);
@@ -98,11 +99,11 @@ function SelectPlayersPage() {
       setPlayersChosen(new_players_chosen);
     }
   };
-
   const submitSelectedPlayers = () => {
+    let email = currentUser.email;
     axios
-      .post(`http://localhost:4000/players/selectPlayers`, {
-        username: "Akshay Mishra",
+      .post(`http://172.105.37.155:4000/players/selectPlayers`, {
+        username: email,
         date: null,
         players: playersChosen,
       })
@@ -117,12 +118,12 @@ function SelectPlayersPage() {
   useEffect(() => {
     let username = "Akshay Mishra";
     axios
-      .get(`http://localhost:4000/players/getPlayers`)
+      .get(`http://172.105.37.155:4000/players/getPlayers`)
       .then((result) => setPlayersInfo(result.data.all_players))
       .catch((err) => console.log(err));
 
     axios
-      .get(`http://localhost:4000/players/getSelectedPlayers/${username}`)
+      .get(`http://172.105.37.155:4000/players/getSelectedPlayers/${username}`)
       .then((result) => {
         setSelectedPlayers(result.data.selected_players);
       })

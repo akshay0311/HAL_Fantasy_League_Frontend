@@ -1,13 +1,6 @@
+import firebase from "firebase/app";
+import "firebase/auth";
 
-import "firebase/app";
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCzTUhwcxkwr63Cq5yfS0A5W1PQAZ4A-_U",
   authDomain: "halfantasyleague.firebaseapp.com",
@@ -19,7 +12,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 
 export const auth = app.auth();

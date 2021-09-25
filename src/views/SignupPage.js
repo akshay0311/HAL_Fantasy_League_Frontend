@@ -67,7 +67,7 @@ function CardContent() {
     try {
       setError("");
       setLoading(true);
-      await auth.createUserWithEmailAndPassword(email, password);
+      await auth.createUserWithEmailAndPassword(email.trim(), password);
       setSuccess("You are successfully signed up!! Move to login page.")
     } catch {
       setSuccess("")

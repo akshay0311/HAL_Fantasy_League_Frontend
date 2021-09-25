@@ -67,7 +67,7 @@ function CardContent() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await auth.signInWithEmailAndPassword(email, password);
+      await auth.signInWithEmailAndPassword(email.trim(), password);
     } catch (error) {
       alert(error);
     }

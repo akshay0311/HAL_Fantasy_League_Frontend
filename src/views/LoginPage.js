@@ -6,6 +6,7 @@ import { FormControl, TextField, Button } from "@mui/material";
 import { Redirect } from "react-router";
 import { auth } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -105,9 +106,9 @@ function CardContent() {
           </Button>
           <br />
           <br />
-          <a href="/signup" className={classes.signupLink}>
+          <Link to ="/signup" className={classes.signupLink}>
             Create an account
-          </a>
+          </Link>
         </div>
       </FormControl>
     </div>

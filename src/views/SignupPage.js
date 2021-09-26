@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import Card from "../components/CustomCard";
 import { FormControl, TextField, Button } from "@mui/material";
 import Alert from "@mui/material/Alert";
+import {Link} from "react-router-dom";
 import {auth} from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
@@ -120,7 +121,7 @@ function CardContent() {
           </Button>
           <br />
           <br />
-          <a href = "/login" className={classes.loginLink}>Already have a account?</a>
+          <Link to = "/login" className={classes.loginLink}>Already have a account?</Link>
         </div>
       </FormControl>
     </div>

@@ -26,22 +26,23 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Anton', sans-serif",
     [theme.breakpoints.down("sm")]:{
         fontSize: "30px",
-        top: "27%"
+        top: "40%",
+        left : "40%"
     }
   },
   text2: {
     color: "#AB5554",
     position: "absolute",
     top: "30%",
-    left: "47%",
+    left: "43%",
     transform: "translate(-50%, -50%)",
     fontSize: "60px",
     fontFamily: "'Anton', sans-serif",
     wordSpacing: "0.1em",
     [theme.breakpoints.down("sm")]:{
         fontSize: "30px",
-        top: "40%",
-        left : "48%"
+        top: "50%",
+        left : "45%"
     }
   }
 }));
@@ -51,7 +52,7 @@ function CustomCarousel() {
     {
       image: carouselImage1,
       text1: "WELCOME TO",
-      text2 : "HAL FANTASY LEAGUE"
+      text2 : "FANTASY LEAGUE"
     }
   ];
 

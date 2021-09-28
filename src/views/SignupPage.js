@@ -6,6 +6,9 @@ import { FormControl, TextField, Button } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import {Link} from "react-router-dom";
 import {auth} from "../firebase";
+import axios from 'axios';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +53,9 @@ function SignupPage() {
 // Form Layout inside card body
 function CardContent() {
   const classes = useStyles();
+  const [userName, setUserName] = useState();
+  const [favPlayer, setFavPlayer] = useState();
+  const [favTeam, setFavTeam] = useState();
   const [email, setEmail] = useState(); // for saving email state
   const [password, setPassword] = useState(); // for saving password state
   const [cPassword, setCPassword] = useState(); // // for saving confirm password state
@@ -84,6 +90,14 @@ function CardContent() {
       {success && <Alert severity="success">{success}</Alert>}
       <br />
       <FormControl className={classes.formField}>
+      <TextField
+          id="standard-basic"
+          label="User Name"
+          variant="standard"
+          className={classes.textField}
+          onChange={(e) => setUserName(e.target.value)}
+        />
+        <br/>
         <TextField
           id="standard-basic"
           label="Email Address"
@@ -91,12 +105,29 @@ function CardContent() {
           className={classes.textField}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <br/>
+         <TextField
+          id="standard-basic"
+          label="Favourite Team"
+          variant="standard"
+          className={classes.textField}
+          onChange={(e) => setFavTeam(e.target.value)}
+        />
+        <br/>
+         <TextField
+          id="standard-basic"
+          label="Favourite Player"
+          variant="standard"
+          className={classes.textField}
+          onChange={(e) => setFavPlayer(e.target.value)}
+        />
         <br />
         <TextField
           id="standard-basic"
           label="Password"
           variant="standard"
           className={classes.textField}
+          type = "password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
@@ -105,6 +136,7 @@ function CardContent() {
           label="Confirm Password"
           variant="standard"
           className={classes.textField}
+          type = "password"
           onChange={(e) => setCPassword(e.target.value)}
         />
         <br />

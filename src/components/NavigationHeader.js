@@ -4,6 +4,7 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { Typography } from "@material-ui/core";
 import { People, Home, Person, ExitToApp } from "@material-ui/icons";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import { Link } from "react-router-dom";
 import { red } from "@mui/material/colors";
 import { auth } from "../firebase";
@@ -113,6 +114,13 @@ export default function NavigationHeader(props) {
             icon={<Person />}
           />
           <span className={classes.navLabel}>Profile</span>
+        </Link>
+        <Link to="/leaderboard" className={classes.navLink}>
+          <BottomNavigationAction
+            className={classes.navAction}
+            icon={<LeaderboardIcon />}
+          />
+          <span className={classes.navLabel}>Leaderboard</span>
         </Link>
         <Link to="#" className={classes.navLink} onClick={signOut}>
           <BottomNavigationAction

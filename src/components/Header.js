@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar,Typography, Toolbar } from "@material-ui/core";
+import { AppBar, Typography, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@mui/material/colors";
 import { Link } from "react-router-dom";
@@ -13,7 +13,11 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     fontFamily: "'Bangers', cursive",
     fontSize: "25px",
+  },
+  logoLink : {
     flexGrow: 1,
+    textDecoration : "none",
+    color : "white",
   },
   menu: {
     display: "flex",
@@ -31,10 +35,10 @@ const useStyles = makeStyles((theme) => ({
       marginRight: "10px",
     },
   },
-  menuLink : {
-    textDecoration : "none",
-    color : "white"
-  }
+  menuLink: {
+    textDecoration: "none",
+    color: "white",
+  },
 }));
 
 function Header() {
@@ -47,7 +51,9 @@ function Header() {
     <div>
       <AppBar position="fixed" className={classes.header}>
         <Toolbar>
-          <Typography className={classes.logo}>Fantasy League</Typography>
+          <Link to="/" className={classes.logoLink}>
+            <Typography className={classes.logo}>Fantasy League</Typography>
+          </Link>
           <div>
             <ul className={classes.menu}>
               {menus.map((menu) => (

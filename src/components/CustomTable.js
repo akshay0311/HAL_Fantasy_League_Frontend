@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { IconButton, makeStyles } from "@material-ui/core";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import { useMemo } from "react";
-import { useState } from "react";
+import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -31,9 +29,11 @@ const useStyles = makeStyles((theme) => ({
 function CustomTable({ tableData, columnsToSort }) {
   const classes = useStyles();
   const [columnKey, setColumnKey] = useState(null);
+  const [sortOrder, setSortOrder] = useState("asc");
   let tableHeaders;
+
   useMemo(() => {
-    if (columnKey) {
+    if (columnKey && sortOrder === "asc") {
       tableData?.sort((currentElement, nextElement) => {
         if (currentElement[columnKey] < nextElement[columnKey]) return -1;
 
@@ -41,9 +41,25 @@ function CustomTable({ tableData, columnsToSort }) {
 
         return 0;
       });
+    } else if (columnKey && sortOrder === "desc") {
+      tableData?.sort((currentElement, nextElement) => {
+        if (currentElement[columnKey] > nextElement[columnKey]) return -1;
+
+        if (currentElement[columnKey] < nextElement[columnKey]) return 1;
+
+        return 0;
+      });
     }
     return tableData;
-  }, [tableData, columnKey]);
+  }, [tableData, columnKey, sortOrder]);
+
+  const iconClicked = (tableHeader) => {
+    setColumnKey(tableHeader);
+    console.log(sortOrder);
+    if (sortOrder === "asc") setSortOrder("desc");
+    else setSortOrder("asc");
+  };
+
   if (tableData.length > 0) tableHeaders = Object.keys(tableData[0]);
   return (
     <div>
@@ -55,9 +71,13 @@ function CustomTable({ tableData, columnsToSort }) {
               {columnsToSort?.includes(tableHeader) && (
                 <IconButton
                   aria-label={tableHeader}
-                  onClick={() => setColumnKey(tableHeader)}
+                  onClick={() => iconClicked(tableHeader)}
                 >
-                  <ArrowUpwardIcon className={classes.sortIcon} />
+                  {sortOrder === "asc" ? (
+                    <ArrowUpward className={classes.sortIcon} />
+                  ) : (
+                    <ArrowDownward className={classes.sortIcon} />
+                  )}
                 </IconButton>
               )}
             </th>

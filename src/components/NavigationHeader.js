@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
     marginTop: theme.spacing(1),
   },
+  logoLink : {
+    textDecoration : "none"
+  },
   navAction: {
     color: "white",
     fontSize: "20px",
@@ -46,6 +49,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(-6),
     marginRight: theme.spacing(3),
     fontSize: "14px",
+    [theme.breakpoints.down("sm")]: {
+      marginRight: theme.spacing(0),
+      fontSize: "13px",
+    },
+  },
+  navIcon: {
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: theme.spacing(2),
+    },
   },
   avatarContainer: {
     position: "relative",
@@ -76,7 +88,9 @@ export default function NavigationHeader(props) {
 
   return (
     <>
-      <Typography className={classes.logo}>Fantasy League</Typography>
+      <Link to="/" className={classes.logoLink}>
+        <Typography className={classes.logo}>Fantasy League</Typography>
+      </Link>
       <BottomNavigation
         value={value}
         onChange={(event, newValue) => {
@@ -84,13 +98,13 @@ export default function NavigationHeader(props) {
         }}
         className={classes.root}
       >
-        <Link to="/" className={classes.navLink}>
+        {/*<Link to="/" className={classes.navLink}>
           <BottomNavigationAction
             className={classes.navAction}
             icon={<Home />}
           />
           <span className={classes.navLabel}>Home</span>
-        </Link>
+      </Link>*/}
         <Link
           to="/dashboard"
           className={
@@ -99,7 +113,7 @@ export default function NavigationHeader(props) {
         >
           <BottomNavigationAction
             className={classes.navAction}
-            icon={<People />}
+            icon={<People className={classes.navIcon} />}
           />
           <span className={classes.navLabel}>Dashboard</span>
         </Link>
@@ -111,21 +125,26 @@ export default function NavigationHeader(props) {
         >
           <BottomNavigationAction
             className={classes.navAction}
-            icon={<Person />}
+            icon={<Person className={classes.navIcon} />}
           />
           <span className={classes.navLabel}>Profile</span>
         </Link>
-        <Link to="/leaderboard" className={classes.navLink}>
+        <Link
+          to="/leaderboard"
+          className={
+            pathName === "leaderboard" ? classes.activeNavLink : classes.navLink
+          }
+        >
           <BottomNavigationAction
             className={classes.navAction}
-            icon={<LeaderboardIcon />}
+            icon={<LeaderboardIcon className={classes.navIcon} />}
           />
           <span className={classes.navLabel}>Leaderboard</span>
         </Link>
         <Link to="#" className={classes.navLink} onClick={signOut}>
           <BottomNavigationAction
             className={classes.navAction}
-            icon={<ExitToApp />}
+            icon={<ExitToApp className={classes.navIcon} />}
           />
           <span className={classes.navLabel}>Log out</span>
         </Link>

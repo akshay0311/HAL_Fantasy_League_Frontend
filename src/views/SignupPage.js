@@ -4,11 +4,8 @@ import { makeStyles } from "@material-ui/core";
 import Card from "../components/CustomCard";
 import { FormControl, TextField, Button } from "@mui/material";
 import Alert from "@mui/material/Alert";
-import {Link} from "react-router-dom";
-import {auth} from "../firebase";
-import axios from 'axios';
-
-
+import { Link } from "react-router-dom";
+import { auth } from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
   },
   signup: {
     fontFamily: "'Open Sans', sans-serif",
+  },
+  logo: {
+    fontFamily: "'Bangers', cursive",
+    fontSize: "20px",
   },
   formField: {
     width: "85%",
@@ -29,9 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
   loginLink: {
     textDecoration: "none",
-    fontSize : "18px",
-    color: "#1976D2"
-  }
+    fontSize: "18px",
+    color: "#1976D2",
+  },
 }));
 
 // Signup Page Layout
@@ -53,31 +54,28 @@ function SignupPage() {
 // Form Layout inside card body
 function CardContent() {
   const classes = useStyles();
-  const [userName, setUserName] = useState();
-  const [favPlayer, setFavPlayer] = useState();
-  const [favTeam, setFavTeam] = useState();
-  const [email, setEmail] = useState(); // for saving email state
-  const [password, setPassword] = useState(); // for saving password state
-  const [cPassword, setCPassword] = useState(); // // for saving confirm password state
-  const [error, setError] = useState(); // for setting error state
-  const [loading, setLoading] = useState(); // for setting load state
-  const [success, setSuccess] = useState(); // for successfully signing up
+  const [userName, setUserName] = useState(); // state for username
+  const [favPlayer, setFavPlayer] = useState(); // state for favorite player
+  const [favTeam, setFavTeam] = useState(); // state for favorite team
+  const [email, setEmail] = useState(); // state for user email
+  const [password, setPassword] = useState(); // state for user password
+  const [cPassword, setCPassword] = useState(); // // state for confirm user password
+  const [error, setError] = useState(); // state for error
+  const [loading, setLoading] = useState(); // state for loading
+  const [success, setSuccess] = useState(); // state for success
 
-  
-  // Handling the clicking of Sign up 
+  // Handling the clicking of Sign up
   async function handleSubmit(e) {
-
     e.preventDefault();
-    if (password !== cPassword)
-      return setError("Password do not match!!");
+    if (password !== cPassword) return setError("Password do not match!!");
 
     try {
       setError("");
       setLoading(true);
-      await auth.createUserWithEmailAndPassword(email.trim(), password);
-      setSuccess("You are successfully signed up!! Move to login page.")
+      await auth.createUserWithEmailAndPassword(email, password);
+      setSuccess("You are successfully signed up!! Move to login page.");
     } catch {
-      setSuccess("")
+      setSuccess("");
       setError(`Failed to create an account`);
     }
     setLoading(false);
@@ -85,19 +83,22 @@ function CardContent() {
 
   return (
     <div>
-      <h1 className={classes.signup}>Signup</h1>
+      <Link to="/" className={classes.logo}>
+        <h1>Fantasy League</h1>
+      </Link>
+      <h2 className={classes.signup}>Signup</h2>
       {error && <Alert severity="warning">{error}</Alert>}
       {success && <Alert severity="success">{success}</Alert>}
       <br />
       <FormControl className={classes.formField}>
-      <TextField
+        <TextField
           id="standard-basic"
           label="User Name"
           variant="standard"
           className={classes.textField}
           onChange={(e) => setUserName(e.target.value)}
         />
-        <br/>
+        <br />
         <TextField
           id="standard-basic"
           label="Email Address"
@@ -105,16 +106,16 @@ function CardContent() {
           className={classes.textField}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <br/>
-         <TextField
+        <br />
+        <TextField
           id="standard-basic"
           label="Favourite Team"
           variant="standard"
           className={classes.textField}
           onChange={(e) => setFavTeam(e.target.value)}
         />
-        <br/>
-         <TextField
+        <br />
+        <TextField
           id="standard-basic"
           label="Favourite Player"
           variant="standard"
@@ -127,7 +128,7 @@ function CardContent() {
           label="Password"
           variant="standard"
           className={classes.textField}
-          type = "password"
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
@@ -136,7 +137,7 @@ function CardContent() {
           label="Confirm Password"
           variant="standard"
           className={classes.textField}
-          type = "password"
+          type="password"
           onChange={(e) => setCPassword(e.target.value)}
         />
         <br />
@@ -153,7 +154,9 @@ function CardContent() {
           </Button>
           <br />
           <br />
-          <Link to = "/login" className={classes.loginLink}>Already have a account?</Link>
+          <Link to="/login" className={classes.loginLink}>
+            Already have a account?
+          </Link>
         </div>
       </FormControl>
     </div>

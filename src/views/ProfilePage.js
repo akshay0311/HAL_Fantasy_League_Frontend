@@ -40,6 +40,7 @@ function ProfilePage() {
     return (
         <div>
             <NavigationHeader/>
+            <br/>
             <Grid container spacing={3} className={classes.gridContainer}>
                 <Grid item sm={4} xs={12}>
                     <ProfileCard/>

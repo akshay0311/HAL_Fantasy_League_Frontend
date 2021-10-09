@@ -6,12 +6,16 @@ import { FormControl, TextField, Button } from "@mui/material";
 import { Redirect } from "react-router";
 import { auth } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: "center",
     marginTop: theme.spacing(10),
+  },
+  logo: {
+    fontFamily: "'Bangers', cursive",
+    fontSize: "20px",
   },
   login: {
     fontFamily: "'Open Sans', sans-serif",
@@ -37,7 +41,7 @@ function LoginPage() {
   const classes = useStyles();
 
   const { currentUser } = useAuth();
-   
+
   console.log(currentUser);
 
   if (currentUser) {
@@ -63,7 +67,7 @@ function CardContent() {
   const [email, setEmail] = useState(); // for setting email state
   const [password, setPassword] = useState(); // for setting password state
   // const [loading, setLoading] = useState(); // for setting loading state
-  
+
   // handling login in the Login Page
   async function handleSubmit(e) {
     e.preventDefault();
@@ -76,7 +80,10 @@ function CardContent() {
 
   return (
     <div>
-      <h1 className={classes.login}>Login</h1>
+      <Link to="/" className={classes.logo}>
+        <h1>Fantasy League</h1>
+      </Link>
+      <h2 className={classes.login}>Login</h2>
       <FormControl className={classes.formField}>
         <TextField
           id="standard-basic"
@@ -106,7 +113,7 @@ function CardContent() {
           </Button>
           <br />
           <br />
-          <Link to ="/signup" className={classes.signupLink}>
+          <Link to="/signup" className={classes.signupLink}>
             Create an account
           </Link>
         </div>

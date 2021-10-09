@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Carousel from "../components/CustomCarousel";
+import Carousel from "../components/TextWithBackgroundImage";
 import Card from "../components/CustomCard";
 import { Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -63,7 +63,7 @@ function HomePage() {
           <Grid item sm={4} xs={12}>
             <Card
               content={<CardContent />}
-              action={<CardAction link = "/" />}
+              action={<CardAction link = "/bet360" />}
             />
           </Grid>
           <Grid item sm={4} xs={12}>

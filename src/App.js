@@ -6,6 +6,7 @@ import ProfilePage from "./views/ProfilePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./PrivateRoute";
+import Bet360Page from "./views/Bet360Page";
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
             </Route>
             <Route path="/login">
               <LoginPage />
+            </Route>
+            <Route path="/bet360">
+              <Bet360Page/>
             </Route>
             <PrivateRoute path="/dashboard" component={SelectPlayersPage}/>
             <PrivateRoute path="/profile" component={ProfilePage}/>

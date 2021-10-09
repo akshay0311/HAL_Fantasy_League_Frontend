@@ -66,11 +66,10 @@ function SelectPlayersPage() {
   const [initials, setInitials] = useState([]);
   const [playersInfo, setPlayersInfo] = useState([]);
   const [playersChosen, setPlayersChosen] = useState([]);
-  const [selectedPlayers, setSelectedPlayers] = useState([]);
 
   const [openConfirmation, setOpenConfirmation] = React.useState(false);
   const [openThanks, setOpenThanks] = React.useState(false);
-
+  console.log(playersChosen)
   const {currentUser} = useAuth();
 
   // Opening the confirmation Dialog Box
@@ -116,7 +115,7 @@ function SelectPlayersPage() {
   };
 
   useEffect(() => {
-    let username = "Akshay Mishra";
+    let username = "akshaycoding123@gmail.com";
     axios
       .get(`http://172.105.37.155:4000/players/getPlayers`)
       .then((result) => setPlayersInfo(result.data.all_players))
@@ -125,7 +124,8 @@ function SelectPlayersPage() {
     axios
       .get(`http://172.105.37.155:4000/players/getSelectedPlayers/${username}`)
       .then((result) => {
-        setSelectedPlayers(result.data.selected_players);
+        console.log(result);
+        setPlayersChosen(result.data.selected_players);
       })
       .catch((err) => console.log(err));
 
@@ -140,6 +140,7 @@ function SelectPlayersPage() {
   return (
     <div>
       <NavigationHeader />
+      <br/>
       <Grid container spacing={6} className={classes.gridContainer}>
         {playersInfo.map((player, index) => (
           <>

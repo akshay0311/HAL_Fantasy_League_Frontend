@@ -1,11 +1,14 @@
 import React, { useMemo, useState } from "react";
 import { IconButton, makeStyles } from "@material-ui/core";
 import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const useStyles = makeStyles((theme) => ({
   table: {
     width: "100%",
     borderCollapse: "collapse",
+    marginBottom : theme.spacing(2)
   },
   td: {
     textAlign: "left",
@@ -23,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
   },
   sortIcon: {
     color: "white",
+  },
+  pagination: {
+    marginTop: theme.spacing(4),
   },
 }));
 
@@ -84,18 +90,27 @@ function CustomTable({ tableData, columnsToSort }) {
             </th>
           ))}
         </tr>
-        {tableData.length > 0 ? 
-        tableData?.map((data) => (
-          <tr>
-            {Object.entries(data).map((obj, ind) => {
-              return (
-                <td className={classes.td}>{Object.entries(data)[ind][1]}</td>
-              );
-            })}
-          </tr>
-        )):
-        <p>No Data Found</p>}
+        {tableData.length > 0 ? (
+          tableData?.map((data) => (
+            <tr>
+              {Object.entries(data).map((obj, ind) => {
+                return (
+                  <td className={classes.td}>{Object.entries(data)[ind][1]}</td>
+                );
+              })}
+            </tr>
+          ))
+        ) : (
+          <p>No Data Found</p>
+        )}
       </table>
+      {tableData.length > 0 && (
+        <div clasName={classes.pagination}>
+          <Stack spacing={2}>
+            <Pagination count={10} shape="rounded" />
+          </Stack>
+        </div>
+      )}
     </div>
   );
 }

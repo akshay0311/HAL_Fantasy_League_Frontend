@@ -116,18 +116,18 @@ function SelectPlayersPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/players/getPlayers`)
+      .get(`http://137.184.77.192:4000/players/getPlayers`)
       .then((result) => {
         setPlayersInfo(result.data.all_players);
-        axios
+       /*  axios
           .get(
-            `http://172.105.37.155:4000/players/getSelectedPlayers/${currentUser.email}`
+            `http://137.184.77.192:4000/players/getSelectedPlayers/${currentUser.email}`
           )
           .then((result) => {
             console.log(result);
             setPlayersChosen(result.data.selected_players);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(err)); */
       })
       .catch((err) => console.log(err));
 

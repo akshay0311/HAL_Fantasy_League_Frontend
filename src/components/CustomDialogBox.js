@@ -48,7 +48,7 @@ function CustomDialogBox({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          {handleClose  && <Button onClick={handleClose}>Disagree</Button>}
+          {openThanks ? <Button onClick={handleClose}>Close</Button> : <Button onClick={handleClose}>Disagree</Button> }
           {submit && <Button onClick={submit}>Agree</Button>}
         </DialogActions>
       </Dialog>

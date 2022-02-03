@@ -38,7 +38,7 @@ function HomePage() {
 
   useEffect(() => {
     axios
-      .get("http://172.105.37.155:4000/players/getPlayers")
+      .get("http://localhost:4000/players/getPlayers")
       .then((result) => {
         let all_players = result.data.all_players;
         let filtered_all_players = [];

@@ -6,6 +6,7 @@ import { FormControl, TextField, Button } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase";
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,6 +68,10 @@ function CardContent() {
   // Handling the clicking of Sign up
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!userName || !favPlayer || !favTeam || !email || !password)
+      return setError("Field should not be empty");
+
     if (password !== cPassword) return setError("Password do not match!!");
 
     try {
@@ -79,6 +84,18 @@ function CardContent() {
       setError(`Failed to create an account`);
     }
     setLoading(false);
+    
+    axios.post("http://localhost:4000/users/addUser", {
+      "name" : userName,
+      "email": email,
+      "password" : password,
+      "favTeam" : favTeam,
+      "favPlayer": favPlayer
+    })
+    .then((result)=> {
+      console.log(result)
+    })
+    .catch((err)=> console.log(err))
   }
 
   return (

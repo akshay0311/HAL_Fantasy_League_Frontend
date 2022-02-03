@@ -22,7 +22,7 @@ function Footer() {
         <Grid item sm={4}>
           <h2>ABOUT US</h2>
           <p>
-            We are a team of 3 computer science engineers/hobbyists who recently came up with the idea to design a web application named Fantasy LEAGUE
+            I am a software engineer/hobbyist who recently came up with the idea to design a web application named Fantasy LEAGUE
             for players and their friends who play football every evening around 8:30 pm to spice up the game a little bit.
           </p>
           <p>Indira Nagar, Lucknow</p>

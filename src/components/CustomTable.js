@@ -61,6 +61,7 @@ function CustomTable({ tableData, columnsToSort }) {
   };
 
   if (tableData.length > 0) tableHeaders = Object.keys(tableData[0]);
+  else tableHeaders = Object.keys(tableData);
   return (
     <div>
       <table className={classes.table}>
@@ -83,7 +84,8 @@ function CustomTable({ tableData, columnsToSort }) {
             </th>
           ))}
         </tr>
-        {tableData.map((data) => (
+        {tableData.length > 0 ? 
+        tableData?.map((data) => (
           <tr>
             {Object.entries(data).map((obj, ind) => {
               return (
@@ -91,7 +93,8 @@ function CustomTable({ tableData, columnsToSort }) {
               );
             })}
           </tr>
-        ))}
+        )):
+        <p>No Data Found</p>}
       </table>
     </div>
   );

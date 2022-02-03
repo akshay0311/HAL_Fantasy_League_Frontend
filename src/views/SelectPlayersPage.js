@@ -69,8 +69,8 @@ function SelectPlayersPage() {
 
   const [openConfirmation, setOpenConfirmation] = React.useState(false);
   const [openThanks, setOpenThanks] = React.useState(false);
-  console.log(playersChosen)
-  const {currentUser} = useAuth();
+  console.log(playersChosen);
+  const { currentUser } = useAuth();
 
   // Opening the confirmation Dialog Box
   const handleClickOpen = () => {
@@ -101,7 +101,7 @@ function SelectPlayersPage() {
   const submitSelectedPlayers = () => {
     let email = currentUser.email;
     axios
-      .post(`http://172.105.37.155:4000/players/selectPlayers`, {
+      .post(`http://localhost:4000/players/selectPlayers`, {
         username: email,
         date: null,
         players: playersChosen,
@@ -109,23 +109,25 @@ function SelectPlayersPage() {
       .then((result) => {
         console.log(result);
         setOpenConfirmation(false);
-        setOpenThanks(true)
+        setOpenThanks(true);
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    let username = "akshaycoding123@gmail.com";
     axios
-      .get(`http://172.105.37.155:4000/players/getPlayers`)
-      .then((result) => setPlayersInfo(result.data.all_players))
-      .catch((err) => console.log(err));
-
-    axios
-      .get(`http://172.105.37.155:4000/players/getSelectedPlayers/${username}`)
+      .get(`http://localhost:4000/players/getPlayers`)
       .then((result) => {
-        console.log(result);
-        setPlayersChosen(result.data.selected_players);
+        setPlayersInfo(result.data.all_players);
+        axios
+          .get(
+            `http://172.105.37.155:4000/players/getSelectedPlayers/${currentUser.email}`
+          )
+          .then((result) => {
+            console.log(result);
+            setPlayersChosen(result.data.selected_players);
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
 
@@ -140,7 +142,7 @@ function SelectPlayersPage() {
   return (
     <div>
       <NavigationHeader />
-      <br/>
+      <br />
       <Grid container spacing={6} className={classes.gridContainer}>
         {playersInfo.map((player, index) => (
           <>
@@ -208,10 +210,10 @@ function SelectPlayersPage() {
         }
       />
       <CustomDialogBox
-        openThanks = {openThanks}
-        handleClose = {handleClose}
-        dialogTitle = "Thank you so much!!"
-        dialogContent = {<CheckCircleOutline fontSize="large"/>}
+        openThanks={openThanks}
+        handleClose={handleClose}
+        dialogTitle="Thank you so much!!"
+        dialogContent={<CheckCircleOutline fontSize="large" />}
       />
     </div>
   );

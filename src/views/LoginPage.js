@@ -97,6 +97,7 @@ function CardContent() {
           id="standard-basic"
           label="Password"
           variant="standard"
+          type="password"
           className={classes.textField}
           onChange={(e) => setPassword(e.target.value)}
         />
